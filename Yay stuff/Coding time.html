@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Testing</title>
+
+
+
+</head>
+<body>
+
+
+<div style= width:100%;>
+
+<img id='img_ID' src="IMG_3156.JPG" usemap="#map" border ="0" width="100%" />
+
+<map id='map_ID' name="map">
+    <area target="" alt="1st" title="1st" href="https://pasteapp.com/p/6EXc6wrvrCA/embed" coords="302,471,865,965" shape="rect">
+    <area target="" alt="2nd" title="2nd" href="https://www.urbandictionary.com/define.php?term=Hi" coords="605,1595,358" shape="circle">
+    <area target="" alt="3rd" title="3rd" href="" coords="1711,1258,2039,757,2236,1175" shape="poly">
+    <area target="" alt="4th" title="4th" href="" coords="2184,1618,2402,1431,2599,1438,2810,1718,2499,2108,2191,2133" shape="poly">
+    <area target="" alt="5th" title="5th" href="" coords="3362,460,3307,1020,3107,1082,2982,1020,2858,885,2834,782,2844,654,2913,554,2982,464,3079,384,3189,377,3248,384,3321,412" shape="poly">
+</map>
+</div>
+
+
+</body>
+
+ <script>
+window.onload = function() {
+  var ImageMap = function(map, img) {
+      var n,
+        areas = map.getElementsByTagName('area'),
+        len = areas.length,
+        coords = [],
+        previousWidth = 3910;
+      for (n = 0; n < len; n++) {
+        coords[n] = areas[n].coords.split(',');
+      }
+      this.resize = function() {
+        var n, m, clen,
+          x = img.offsetWidth / previousWidth;
+        for (n = 0; n < len; n++) {
+          clen = coords[n].length;
+          for (m = 0; m < clen; m++) {
+            coords[n][m] *= x;
+          }
+          areas[n].coords = coords[n].join(',');
+        }
+        previousWidth = document.body.clientWidth;
+        return true;
+      };
+      window.onresize = this.resize;
+    },
+    imageMap = new ImageMap(document.getElementById('map_ID'), document.getElementById('img_ID'));
+  imageMap.resize();
+  return;
+}
+</script>
+
+</html>
